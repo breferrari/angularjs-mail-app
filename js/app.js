@@ -9,12 +9,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
       url: "/",
-      templateUrl: "template/home.html",
+      templateUrl: "templates/home.html",
       controller: 'HomeController'
     })
     .state('settings', {
       url: "/settings",
-      templateUrl: "template/settings.html",
+      templateUrl: "templates/settings.html",
       controller: "SettingsController"
     });
 });
