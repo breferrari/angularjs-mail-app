@@ -1,5 +1,13 @@
 <div class="col-sm-4" ng-controller="MailListingController">
   <h2>Sidebar</h2>
+  <ul id="emailListing">
+    <li ng-repeat="mail in email">
+      <div class="container emailListing">
+        <div class="col-sm-8">{{mail.from}}</div>
+        <div class="col-sm-12">{{mail.subject}}</div>
+      </div>
+    </li>
+  </ul>
 </div>
 
 <div class="col-sm-8" ng-controller="ContentController">

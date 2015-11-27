@@ -11,3 +11,4 @@ Test project for a Mail WebApp using AngularJS and Bootstrap.
 - Data Binding
 - Services
 - Form Control
+- HTTP Service (Reading JSON file in a Sinatra server)
