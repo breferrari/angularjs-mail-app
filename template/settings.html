@@ -1,0 +1,53 @@
+<div class="row">
+  <h1>Update your settings</h1>
+  <form name="form" ng-submit="updateSettings()">
+    <fieldset>
+      <legend>Settings</legend>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="input-group">
+            <span class="input-group-addon">Name</span>
+            <input class="form-control" name="name" ng-maxlength=20 ng-minlength=3 ng-model="settings.name" ng-pattern="/^[a-zA-Z]+$/" placeholder="Name Input" required type="text">
+          </div>
+          <div ng-show="form.name.$dirty && form.name.$invalid">
+            <div class="error" ng-show="form.name.$error.required">Your name is required.</div>
+            <div class="error" ng-show="form.name.$error.minlength">Your name must be greater than 3 characters.</div>
+            <div class="error" ng-show="form.name.$error.maxlength">Your name cannot be greater than 20 characters.</div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="input-group">
+            <span class="input-group-addon">Email</span>
+            <input class="form-control" name="email" ng-model="settings.email" placeholder="Email Input" type="email">
+          </div>
+          <div ng-show="form.email.$dirty && form.email.$invalid">
+            <div class="error" ng-show="form.email.$error.email">Your email is invalid.</div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="input-group">
+            <span class="input-group-addon">Age</span>
+            <input class="form-control" max=200 min=3 name="age" ng-model="settings.age" placeholder="Age Input" type="number">
+          </div>
+          <div ng-show="form.age.$dirty && form.age.$invalid">
+            <div class="error" ng-show="form.age.$error.min">Your must be at least 3 years old to use this site.</div>
+            <div class="error" ng-show="form.age.$error.max">You are 200 or older? Really?</div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-primary btn-block" ng-disabled="form.$dirty && form.$invalid" type="submit">
+            <i class="glyphicon glyphicon-refresh"></i>&nbsp;Update</button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
