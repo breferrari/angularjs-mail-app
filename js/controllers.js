@@ -1,5 +1,13 @@
 app.controller('HomeController', function($scope) { // Home page
-
+  $scope.selectedMail = function(mail) {
+    $scope.selectedMail = mail;
+    console.log("mail selected");
+  };
+  $scope.isSelected = function(mail) {
+    if ($scope.selectedMail) {
+      return $scope.selectedMail === mail;
+    }
+  };
 });
 //Do this so minifiers don't mess code or AngularJS will not identify the needed dependencies
 app.controller('MailListingController', ['$scope', '$http', function($scope, $http) { // Email list @ Home page
