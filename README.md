@@ -12,3 +12,4 @@ Test project for a Mail WebApp using AngularJS and Bootstrap.
 - Services
 - Form Control
 - HTTP Service (Reading JSON file in a Sinatra server)
+- Trust HTML Content using $sce as a filter

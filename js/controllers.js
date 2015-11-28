@@ -1,14 +1,19 @@
-app.controller('HomeController', function($scope) { // Home page
+app.controller('HomeController', ['$scope', function($scope) { // Home page
   $scope.setSelectedMail = function(mail) {
     $scope.selectedMail = mail;
-    console.log("mail selected");
+    console.log("-- Mail selected");
   };
   $scope.isSelected = function(mail) {
     if ($scope.selectedMail) {
       return $scope.selectedMail === mail;
     }
   };
-});
+  app.filter('to_trusted', ['$sce', function($sce) { //use $sce as a filter to trust HTML content
+    return function(text) {
+      return $sce.trustAsHtml(text);
+    };
+  }]);
+}]);
 //Do this so minifiers don't mess code or AngularJS will not identify the needed dependencies
 app.controller('MailListingController', ['$scope', '$http', function($scope, $http) { // Email list @ Home page
   $scope.email = []; // To get from a server
@@ -30,9 +35,16 @@ app.controller('MailListingController', ['$scope', '$http', function($scope, $ht
   // });
 }]);
 
-app.controller('ContentController', function($scope) { // Email content @ Home page
-
-});
+app.controller('ContentController', ['$scope', function($scope) { // Email content @ Home page
+  $scope.showingReply = false;
+  $scope.reply = {};
+  $scope.toggleReplyForm = function() {
+    $scope.showingReply = !$scope.showingReply; //Change from true to false and vice versa
+    $scope.reply = {}; // Reset scope
+    $scope.reply.to = $scope.selectedMail.from.join(", ");
+    $scope.reply.body = "\n\n -------------------------- \n\n" + $scope.selectedMail.body;
+  };
+}]);
 
 app.controller('SettingsController', function($scope) { // Settings page
   $scope.settings = { // Useful to populate user info

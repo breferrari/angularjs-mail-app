@@ -1,7 +1,7 @@
 <div class="col-sm-4" ng-controller="MailListingController">
   <h2>Sidebar</h2>
   <ul id="emailListing">
-    <li ng-repeat="mail in email" ng-click="setSelectedMail(mail)">
+    <li ng-click="setSelectedMail(mail)" ng-repeat="mail in email">
       <div class="container emailListing" ng-class="{selected: isSelected(mail)}">
         <div class="col-sm-8">{{mail.from}}</div>
         <div class="col-sm-12">{{mail.subject}}</div>
@@ -12,5 +12,47 @@
 
 <div class="col-sm-8" ng-controller="ContentController">
   <h2>Content</h2>
-  {{selectedMail}}
+  <div ng-show="!selectedMail">
+    <h1>No conversation selected.</h1>
+  </div>
+  <div ng-show="selectedMail">
+    <form id="replyForm" ng-show="showingReply" ng-submit="sendEmailReply()">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="input-group">
+            <span class="input-group-addon">To</span>
+            <input class="form-control" ng-model="reply.to" placeholder="" type="email">
+          </div>
+        </div>
+        <br><br><br>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <textarea class="form-control" ng-model="reply.body" rows="3">{{reply.body}}</textarea>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-block btn-sm" ng-click="sendReply()">Send</button>
+        <button class="btn btn-danger btn-block btn-sm" ng-click="toggleReplyForm()">Cancel</button>
+      </div>
+    </form>
+    <div class="row header">
+      <div class="col-sm-6">
+        {{selectedMail.subject}}
+      </div>
+      <div class="col-sm-6">
+        {{selectedMail.sent_at | date: 'MM/dd/yy HH:MM:ss'}}
+      </div>
+    </div>
+    <div class="row actions">
+      <div class="col-sm-8">
+        {{selectedMail.from.join(", ")}}
+        to
+        {{selectedMail.to}}
+      </div>
+      <a class="btn btn-primary btn-sm" ng-click="toggleReplyForm()">Reply</a>
+    </div>
+    <!-- Do this so body can show HTML content -->
+    <div class="col-sm-12" ng-bind="selectedMail.body"></div>
+  </div>
 </div>
