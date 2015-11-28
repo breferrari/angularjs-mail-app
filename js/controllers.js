@@ -1,5 +1,5 @@
 app.controller('HomeController', function($scope) { // Home page
-  $scope.selectedMail = function(mail) {
+  $scope.setSelectedMail = function(mail) {
     $scope.selectedMail = mail;
     console.log("mail selected");
   };
